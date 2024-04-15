@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Header Values</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    td{
+        text-align: center;
+    }
+    body{
+        background-color: dimgrey;
+    }
+    table{
+        color: "white";
+        border: '3px solid white' ;
+
+    }
+  </style>
+</head>
+<body >
+  <div id="root"></div>
+  <script type="text/babel">
+  
+    function MyApp() {
+      const [headers, setHeaders] = React.useState({});
+
+      React.useEffect(() => {
+        async function postData() {
+          const url = "https://chimpu.xyz/api/post.php";
+          const data = {
+            "phonenumber": "8950889889"
+          };
+
+          try {
+            const response = await fetch(url, {
+              method: "POST",
+              body: JSON.stringify(data)
+            });
+
+            const jsonData = await response.json();
+            const headersObj = {};
+            response.headers.forEach((value, name) => {
+              headersObj[name] = value;
+            });
+
+            setHeaders(headersObj);
+          } catch (error) {
+            console.error("Error:", error);
+          }
+        }
+
+        postData();
+      }, []);
+
+      return (
+        <>
+          <table >
+            <thead>
+              <tr>
+                <th>Header key</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.keys(headers).map(headerKey => (
+                <tr key={headerKey}>
+                  <td>{headerKey}</td>
+                  <td>{headers[headerKey]}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      );
+    }
+
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
+    root.render(<MyApp />);
+
+  </script>
+</body>
+</html>
