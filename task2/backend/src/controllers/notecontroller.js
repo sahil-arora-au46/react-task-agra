@@ -1,5 +1,6 @@
 const { text } = require("express");
 const {getConnection} = require("../../configDB");
+const { v4: uuidv4 } = require('uuid');
 
 
 async function getNote(req, res) {
@@ -34,11 +35,14 @@ async function getNote(req, res) {
 
 async function addNote(req, res) {
   const connection = await getConnection();
-  const { id, note } = req.body;
-  console.log(id,note)
+  const { note } = req.body;
+  const id = uuidv4();
   try {
     await connection.query(`INSERT INTO notes (id, text) VALUES (?,?)`,[id,note]);
-    res.status(200).send('Note added successfully');
+    const [rows] = await connection.query('SELECT * FROM notes WHERE id = ?', [id]);
+    const insertedData = rows[0];
+    res.status(200).json(insertedData);
+    console.log(insertedData)
   } catch (err) {
     console.error('Error adding note:', err);
     res.status(500).send('Internal Server Error');

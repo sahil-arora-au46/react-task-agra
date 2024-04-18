@@ -2,10 +2,10 @@ const express = require("express");
 
 const app = express();
 const {noteRouter} = require("./routers/noteRouter")
+var cors = require('cors')
 
 
-// app.use(express.json({extended:true}))
-// app.use(express.urlencoded({extented:true}))
+app.use(cors())
 app.use("/",noteRouter)
 
 

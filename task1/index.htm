@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editable Task Table</title>
+  <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.18.6/babel.min.js"></script>
+  <link rel="stylesheet" href="./style.css"> </head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const tasks = [
+  {
+    task: "Onboarding Call",
+    status: "",
+  },
+  {
+    task: "Google Search Console Access",
+    status: "",
+  },
+  {
+    task: "Google Analytics Access",
+    status: "",
+  },
+  {
+    task: "Website Access",
+    status: "",
+  },
+  {
+    task: "Technical Audit",
+    status: "",
+  },
+  {
+    task: "Anchor Text and Semantic Analysis",
+    status: "",
+  },
+  {
+    task: "Competitor Analysis",
+    status: "",
+  },
+  {
+    task: "Anchor Text/URL Mapping",
+    status: "",
+  },
+  {
+    task: "Google Data Studio Report + Local Reporting Suite",
+    status: "",
+  },
+  {
+    task: "Site Level Optimization",
+    status: "",
+  },
+  {
+    task: "Content Creation",
+    status: "",
+  },
+  {
+    task: "Content Publishing",
+    status: "",
+  },
+  {
+    task: "Review Management",
+    status: "",
+  },
+  {
+    task: "Index Links",
+    status: "",
+  },
+  {
+    task: "Video Recap",
+    status: "",
+  },
+];
+;
+
+    function App() {
+      const [tableData, setTableData] = React.useState(tasks);
+
+      const handleEditTask = (index, newValue) => {
+        setTableData((prevData) => {
+          const updatedData = [...prevData];
+          updatedData[index].task = newValue;
+          return updatedData;
+        });
+      };
+
+      const handleEditStatus = (index, newValue) => {
+        setTableData((prevData) => {
+          const updatedData = [...prevData];
+          updatedData[index].status = newValue;
+          return updatedData;
+        });
+      };
+
+
+
+    // dummy function for handling post request
+    //   const prepareDataForPostRequest = async () => {
+ 
+//   const response = await fetch('https://dummy-backend-api.com/api/tasks', {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify(tableData),
+//   });
+
+
+//   if (response.ok) {
+//     console.log("Data sent successfully!");
+//   } else {
+//     console.error("Error sending data:", await response.text());
+//   }
+// };
+
+      return (
+        <div className="table-container">
+          <h1>Editable Task Table</h1>
+          <table className="editable-table">
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tableData.map((row, index) => (
+                <tr key={index} onFocus={() => prepareDataForPostRequest()}>
+                  <td>
+                    <input
+                      type="text"
+                      value={row.task}
+                      onChange={(e) => handleEditTask(index, e.target.value)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      value={row.status}
+                      onChange={(e) => handleEditStatus(index, e.target.value)}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

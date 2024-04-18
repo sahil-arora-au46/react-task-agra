@@ -1,0 +1,28 @@
+
+.editable-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .editable-table th,
+  .editable-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+ 
+  .editable-table tr:focus {
+    background-color: #494444;
+  }
+  
+
+  .editable-table input[type="text"] {
+    width: 100%;
+    border: none;
+    outline: none;
+  }
+  
+
+  .table-container {
+    text-align: center; 
+  
