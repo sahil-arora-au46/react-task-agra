@@ -6,9 +6,9 @@ async function createPoolConfig() {
   // ... your database configuration logic
   return {
     host: 'localhost',
-    user: 'sahil',
-    password: 'Bimla@8950',
-    database: 'noteapp',
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE_NAME,
   };
 }
 
