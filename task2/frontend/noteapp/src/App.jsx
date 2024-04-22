@@ -54,7 +54,7 @@ async function deleteNote(id){
 <button onClick={addNote} className='border-gray-700  border-solid border-2 rounded-md border-l-0 rounded-l-none bg-slate-500 p-2'>Add Note</button>
 </div>
      </div>
-    <div className='flex flex-wrap justify-start' >  
+    <div className='flex flex-wrap items-start' >  
     {notes.map((todo)=>{
       return <Card key={todo.id} id={todo.id} onDelete={deleteNote} text={todo.text} date={todo.created_at}/>
     })}

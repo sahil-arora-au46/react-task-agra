@@ -42,7 +42,6 @@ async function addNote(req, res) {
     const [rows] = await connection.query('SELECT * FROM notes WHERE id = ?', [id]);
     const insertedData = rows[0];
     res.status(200).json(insertedData);
-    console.log(insertedData)
   } catch (err) {
     console.error('Error adding note:', err);
     res.status(500).send('Internal Server Error');

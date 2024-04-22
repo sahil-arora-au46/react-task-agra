@@ -1,15 +1,16 @@
 import React from 'react';
 
-const Card = ({id, text, date, onDelete }) => {
+const Card = ({id, text, date, onDelete}) => {
 
   function deleteHandler(){
     onDelete(id)
   }
   
   return (
-    <div className="max-w-xs mx-4 bg-white shadow-md rounded-lg overflow-hidden m-4">
+    <div className=" max-w-xs max-h-max mx-4 bg-white shadow-md rounded-lg  m-4 flex- ">
+
       <div className="p-4">
-        <p className="text-lg font-bold text-gray-800 whitespace-normal overflow-hidden md:overflow-hidden">{text}</p>
+        <p className="text-lg font-bold text-gray-800 whitespace-normal ">{text}</p>
         <p className="text-gray-600 mt-2">{date}</p>
       </div>
       <div className="flex justify-end p-4">
